@@ -19,6 +19,9 @@ class AppTheme {
     centerTitle: true,
     titleTextStyle: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: black),
     ),
+    textTheme: TextTheme(
+      headlineSmall: TextStyle(fontSize: 25,fontWeight: FontWeight.w400,color: black)
+    )
   );
 
   static ThemeData darkTheme = ThemeData(
