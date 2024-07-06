@@ -19,8 +19,10 @@ class AppTheme {
     centerTitle: true,
     titleTextStyle: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: black),
     ),
+
     textTheme: TextTheme(
-      headlineSmall: TextStyle(fontSize: 25,fontWeight: FontWeight.w400,color: black)
+      headlineSmall: TextStyle(fontSize: 25,fontWeight: FontWeight.w400,color: black),
+      titleLarge: TextStyle(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.black)
     )
   );
 
