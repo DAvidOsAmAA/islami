@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:islamic/Widgets/loading_indicator.dart';
 
-class SuraDetailsScreen extends StatelessWidget {
+class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = "sura-details";
+
+  @override
+  State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
+}
+
+class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
+  List<String> ayat = [];
 
   @override
   Widget build(BuildContext context) {
     suraDetailsArgs args =
         ModalRoute.of(context)!.settings.arguments as suraDetailsArgs;
-    LoadSuraFile(args.index);
+    if (ayat.isEmpty) {
+      LoadSuraFile(args.index);
+    }
 
     return Container(
         decoration: BoxDecoration(
@@ -15,14 +26,37 @@ class SuraDetailsScreen extends StatelessWidget {
                 image: AssetImage("assets/images/default_bg.png"),
                 fit: BoxFit.cover)),
         child: Scaffold(
-          appBar: AppBar(
-            title: Text(args.suraName),
-          ),
-          body: Container(),
-        ));
+            appBar: AppBar(
+              title: Text(
+                args.suraName,
+              ),
+            ),
+            body: ayat.isEmpty
+                ? Center(child: LoadingIndicator())
+                : Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(22),
+                    
+                  ),
+                  padding: EdgeInsets.all(22),
+                  margin: EdgeInsets.all(25),
+                  child: ListView.builder(
+                      itemBuilder: (context, index) => Text(
+                        ayat[index],
+                        style: Theme.of(context).textTheme.titleLarge,
+                        textDirection: TextDirection.rtl,
+                      ),
+                      itemCount: ayat.length,
+                    ),
+                )));
   }
 
-  void LoadSuraFile(int index) {}
+  Future<void> LoadSuraFile(int index) async {
+    String sura = await rootBundle.loadString('assets/files/${index + 1}.txt');
+    ayat = sura.split('\n');
+    setState(() {});
+  }
 }
 
 class suraDetailsArgs {
