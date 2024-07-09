@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islamic/Widgets/loading_indicator.dart';
 import 'package:islamic/tabs/hadeth/hadeth_class.dart';
+import 'package:islamic/tabs/settings/settings.dart';
+import 'package:provider/provider.dart';
 
 class HadethDetailsScreen extends StatelessWidget {
   static const String routeName = 'hadeth-details';
@@ -10,7 +12,7 @@ class HadethDetailsScreen extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/default_bg.png"),
+                image: AssetImage("assets/images/${Provider.of<SettingProvider>(context).backgroundImageName}.png"),
                 fit: BoxFit.cover)),
         child: Scaffold(
           appBar: AppBar(
@@ -20,7 +22,7 @@ class HadethDetailsScreen extends StatelessWidget {
           ),
           body: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
               borderRadius: BorderRadius.circular(22),
             ),
             padding: EdgeInsets.all(22),

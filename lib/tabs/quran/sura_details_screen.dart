@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic/Widgets/loading_indicator.dart';
+import 'package:islamic/tabs/settings/settings.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = "sura-details";
@@ -23,7 +25,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/default_bg.png"),
+                image: AssetImage("assets/images/${Provider.of<SettingProvider>(context).backgroundImageName}.png"),
                 fit: BoxFit.cover)),
         child: Scaffold(
             appBar: AppBar(
@@ -35,7 +37,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                 ? Center(child: LoadingIndicator())
                 : Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
                     borderRadius: BorderRadius.circular(22),
                     
                   ),
